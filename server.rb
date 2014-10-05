@@ -1,23 +1,20 @@
 require 'json'
 require 'rest_client'
-require 'active_support'
-require 'active_support/inflector'
+require 'active_support/all'
 
 class Server
   API_ROOT = 'http://0.0.0.0:5000'
 
   def initialize
     authorize
+    generate_command_mappings
   end
-
-  private
 
   def go
     loop do
-      commands = check_for_commands
-      commands.each do |c|
+      check_for_commands.each do |c|
         command, *args = c['message'].split(':')
-        klass = command_mappings[command.downcase]
+        klass = @mappings[command.downcase]
         if klass.present?
           instance = klass.new(args)
           instance.go
@@ -29,30 +26,31 @@ class Server
     end
   end
 
+  private
+
   def authorize
-    self.key = begin File.read("~/.remote_control_key") rescue throw "No API key found!" end
+    @api_key = begin File.read(File.expand_path("~/.remote_control_key")).chomp rescue throw "No API key found!" end
   end
 
   def send(message)
-    RestClient.post("#{API_ROOT}/send", key: key, message: message) if message.present?
+    RestClient.post("#{API_ROOT}/send", key: @api_key, message: message) if message.present?
   end
 
   def destroy(id)
-    RestClient.post "#{API_ROOT}/destroy/#{id}", key: key
+    RestClient.post "#{API_ROOT}/destroy/#{id}", key: @api_key
   end
 
   def check_for_commands
-    JSON.load RestClient.get("#{API_ROOT}/poll?key=#{key}")
+    JSON.load(RestClient.get("#{API_ROOT}/poll?key=#{@api_key}"))['commands']
   end
 
-  def command_mappings
-    return self.mappings if self.mappings.present?
-    self.mappings = {}
+  def generate_command_mappings
+    @mappings = {}
     Dir['commands/*.rb'].each do |file|
-      require file
-      klass = file.split("/").last.camelize.constantize
+      require_relative file
+      klass = file.split("/").last.split('.').first.camelize.constantize
       klass.new.matches.each do |match|
-        self.mappings[match] = klass
+        @mappings[match] = klass
       end
     end
   end
