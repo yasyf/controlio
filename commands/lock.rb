@@ -15,6 +15,6 @@ class Lock
   end
 
   def matches
-    ['lock']
+    ['lock', 'lock my computer', 'lock my screen']
   end
 end

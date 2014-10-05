@@ -18,6 +18,6 @@ class Play
   end
 
   def matches
-    ['play']
+    ['play', 'play my music']
   end
 end

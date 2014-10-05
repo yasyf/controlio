@@ -16,6 +16,6 @@ class Pause
   end
 
   def matches
-    ['pause']
+    ['pause', 'pause my music']
   end
 end
