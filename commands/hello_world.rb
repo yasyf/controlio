@@ -10,6 +10,10 @@ class HelloWorld
     "Hello, World!"
   end
 
+  def is_media
+    false
+  end
+
   def matches
     ['hw', 'hello world']
   end

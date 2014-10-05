@@ -3,7 +3,7 @@ require 'rest_client'
 require 'active_support/all'
 
 class Server
-  API_ROOT = 'http://0.0.0.0:5000'
+  API_ROOT = 'http://ym-remote-control-web.herokuapp.com'
 
   def initialize
     authorize
@@ -18,7 +18,7 @@ class Server
         if klass.present?
           instance = klass.new(*args)
           instance.go
-          send instance.respond
+          send instance.respond, instance.media?
         else
           send "That command was not found!"
         end
@@ -34,8 +34,13 @@ class Server
     @api_key = begin File.read(File.expand_path("~/.remote_control_key")).chomp rescue throw "No API key found!" end
   end
 
-  def send(message)
-    RestClient.post("#{API_ROOT}/send", key: @api_key, message: message) if message.present?
+  def send(message, media=false)
+    if media
+      options = {key: @api_key, media_url: message}
+    else
+      options = {key: @api_key, message: message}
+    end
+    RestClient.post("#{API_ROOT}/send", options) if message.present?
   end
 
   def destroy(id)

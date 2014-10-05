@@ -10,6 +10,10 @@ class Lock
     "Your screen has been locked!"
   end
 
+  def is_media
+    false
+  end
+
   def matches
     ['lock']
   end

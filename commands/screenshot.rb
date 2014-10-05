@@ -1,6 +1,5 @@
-class Type
-  def initialize(*args)
-    @keys = args.first
+class Screenshot
+  def initialize()
   end
 
   def go
@@ -11,8 +10,8 @@ class Type
     "Your string has been typed!"
   end
 
-  def is_media
-    false
+  def media?
+    true
   end
 
   def matches

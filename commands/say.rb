@@ -11,6 +11,10 @@ class Say
     nil
   end
 
+  def is_media
+    false
+  end
+
   def matches
     ['say']
   end
