@@ -16,7 +16,7 @@ class Server
         command, *args = c['message'].split(':')
         klass = @mappings[command.downcase]
         if klass.present?
-          instance = klass.new(args)
+          instance = klass.new(*args)
           instance.go
           send instance.respond
         else
@@ -24,7 +24,7 @@ class Server
         end
         destroy c['_id']
       end
-      sleep 5
+      sleep 1
     end
   end
 

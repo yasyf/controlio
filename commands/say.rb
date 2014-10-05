@@ -1,6 +1,6 @@
 class Say
   def initialize(*args)
-    @text = args.first
+    @text = args.to_a.first
   end
 
   def go
