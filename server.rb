@@ -75,7 +75,7 @@ class Server
 
   def generate_command_mappings
     @mappings = {}
-    Dir['commands/*.rb'].each do |file|
+    Dir["#{File.dirname(__FILE__)}/commands/*.rb"].each do |file|
       require_relative file
       klass = file.split("/").last.split('.').first.camelize.constantize
       klass.new.matches.each do |match|
@@ -86,3 +86,5 @@ class Server
     end
   end
 end
+
+Server.new.go
