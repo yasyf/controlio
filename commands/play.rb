@@ -4,7 +4,9 @@ class Play
   end
 
   def go
-    `osascript -e 'tell application "#{@app}" to playpause'`
+    `osascript -e 'tell application "#{@app}" to launch'`
+    sleep 1
+    `osascript -e 'tell application "#{@app}" to play'`
   end
 
   def respond
@@ -16,6 +18,6 @@ class Play
   end
 
   def matches
-    ['play', 'pause']
+    ['play']
   end
 end
