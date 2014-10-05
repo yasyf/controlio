@@ -52,13 +52,19 @@ class Server
     JSON.load(RestClient.get("#{API_ROOT}/poll?key=#{@api_key}"))['commands']
   end
 
+  def permutations
+    ['', 'do ', 'take a ']
+  end
+
   def generate_command_mappings
     @mappings = {}
     Dir['commands/*.rb'].each do |file|
       require_relative file
       klass = file.split("/").last.split('.').first.camelize.constantize
       klass.new.matches.each do |match|
-        @mappings[match] = klass
+        permutations.each do |p|
+          @mappings["#{p}#{match}"] = klass
+        end
       end
     end
   end
