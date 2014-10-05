@@ -18,9 +18,11 @@ class Server
         if klass.present?
           instance = klass.new(args)
           instance.go
-          send(instance.respond)
+          send instance.respond
+        else
+          send "That command was not found!"
         end
-        destroy(c['_id'])
+        destroy c['_id']
       end
       sleep 5
     end
