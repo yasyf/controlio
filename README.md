@@ -6,6 +6,7 @@ Controlio is a simple service which allows you to control your computer via SMS 
 
 ![Demo 1](http://cl.ly/XtPg/IMG_1775.PNG)
 ![Demo 2](http://cl.ly/XsQQ/IMG_1776.PNG)
+![Demo 3](http://cl.ly/XsJy/IMG_1777.PNG)
 
 ## Commands
 
