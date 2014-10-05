@@ -1,6 +1,6 @@
 class Say
   def initialize(*args)
-    @text = args.first
+    @text = args[0...-1].join(' ')
   end
 
   def go

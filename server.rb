@@ -13,15 +13,21 @@ class Server
   def go
     loop do
       check_for_commands.each do |c|
-        command, *args = c['message'].split(':')
-        klass = @mappings[command.downcase]
-        if klass.present?
-          puts "Running #{klass}"
-          instance = klass.new(*args, API_ROOT)
-          instance.go
-          send instance.respond, instance.media?
-        else
-          send "That command was not found!"
+        matched = false
+        command_options(c).each do |split|
+          command, *args = split
+          klass = @mappings[command.downcase]
+          if klass.present?
+            puts "Running #{klass}"
+            instance = klass.new(*args, API_ROOT)
+            instance.go
+            send instance.respond, instance.media?
+            matched = true
+            break
+          end
+        end
+        unless matched
+          send "Command '#{c['message']}' was not found!"
         end
         destroy c['_id']
       end
@@ -50,6 +56,17 @@ class Server
 
   def check_for_commands
     JSON.load(RestClient.get("#{API_ROOT}/poll?key=#{@api_key}"))['commands']
+  end
+
+  def command_options(c)
+    options = []
+    options << c['message'].split(':')
+    split_on_spaces = c['message'].split(' ')
+    options << split_on_spaces
+    (2...options.length).each do |i|
+      options << [split_on_spaces[0...i].join(' ')] + split_on_spaces[i..-1]
+    end
+    options
   end
 
   def permutations

@@ -1,6 +1,6 @@
 class Type
   def initialize(*args)
-    @keys = args.first
+    @keys = args[0...-1].join(' ')
   end
 
   def go
