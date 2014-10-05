@@ -10,7 +10,7 @@ class HelloWorld
     "Hello, World!"
   end
 
-  def is_media
+  def media?
     false
   end
 

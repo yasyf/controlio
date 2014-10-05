@@ -10,7 +10,7 @@ class Lock
     "Your screen has been locked!"
   end
 
-  def is_media
+  def media?
     false
   end
 

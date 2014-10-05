@@ -16,7 +16,8 @@ class Server
         command, *args = c['message'].split(':')
         klass = @mappings[command.downcase]
         if klass.present?
-          instance = klass.new(*args)
+          puts "Running #{klass}"
+          instance = klass.new(*args, API_ROOT)
           instance.go
           send instance.respond, instance.media?
         else

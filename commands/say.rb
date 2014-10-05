@@ -1,6 +1,6 @@
 class Say
   def initialize(*args)
-    @text = args.to_a.first
+    @text = args.first
   end
 
   def go
@@ -11,7 +11,7 @@ class Say
     nil
   end
 
-  def is_media
+  def media?
     false
   end
 

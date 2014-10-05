@@ -11,7 +11,7 @@ class Type
     "Your string has been typed!"
   end
 
-  def is_media
+  def media?
     false
   end
 

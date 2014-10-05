@@ -1,13 +1,20 @@
+require 'rest_client'
+
 class Screenshot
-  def initialize()
+  FILE_LOCATION = "/tmp/tmp.jpg"
+
+  def initialize(*args)
+    @api_root = args.last
   end
 
   def go
-    `osascript -e 'tell application "System Events" to keystroke "#{@keys}"'`
+    `screencapture -t jpg -x #{FILE_LOCATION}`
+    response = RestClient.post "#{@api_root}/upload", file: File.new(FILE_LOCATION, 'rb')
+    @url = JSON.load(response)['url']
   end
 
   def respond
-    "Your string has been typed!"
+    @url
   end
 
   def media?
@@ -15,6 +22,6 @@ class Screenshot
   end
 
   def matches
-    ['type']
+    ['screenshot']
   end
 end
