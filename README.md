@@ -4,7 +4,7 @@ Controlio is a simple service which allows you to control your computer via SMS 
 
 ## Setup
 
-See the instructions at the [web repo](https://github.com/Controlio/controlio_web).
+See the instructions at the [web repo](https://github.com/Controlio/controlio_web). API key goes in a text file at `~/.remote_control_key`. Start the server with `./run_server.rb start`.
 
 ## Screenshots
 
