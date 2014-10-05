@@ -1,15 +1,15 @@
 # Controlio
 
-Controlio is a simple service which allows you to control your computer via SMS. With one simple registration step, you not longer have to be bound to your clunkly machine for on-the-go operations. No more running out of the house, only to remember you forgot to do something on your computer!
+Controlio is a simple service which allows you to control your computer via SMS **and voice**. With one simple registration step, you not longer have to be bound to your clunkly machine for on-the-go operations. No more running out of the house, only to remember you forgot to do something on your computer!
 
 ## Screenshots
 
-![Demo 1](http://cl.ly/XtTt/IMG_1772.PNG)
-![Demo 2](http://cl.ly/Xse4/IMG_1773.PNG)
-![Demo 3](http://cl.ly/XtGz/IMG_1774.PNG)
-
+![Demo 1](http://cl.ly/XtPg/IMG_1775.PNG)
+![Demo 2](http://cl.ly/XsQQ/IMG_1776.PNG)
 
 ## Commands
+
+Commands are located in the [commands](commands/) folder. Each command must implement `initialize(*args)`, `go`, `respond`, `media?`, and `matches`.
 
 #### Hello World
 
