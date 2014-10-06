@@ -8,8 +8,8 @@ See the instructions at the [web repo](https://github.com/Controlio/controlio_we
 
 ## Screenshots
 
-![Demo 1](http://cl.ly/XtPg/IMG_1775.PNG)
-![Demo 2](http://cl.ly/XsQQ/IMG_1776.PNG)
+![Demo 1](http://cl.ly/XsUb/IMG_1775.PNG)
+![Demo 2](http://cl.ly/XtOz/IMG_1776.PNG)
 ![Demo 3](http://cl.ly/XsJy/IMG_1777.PNG)
 
 ## Commands
