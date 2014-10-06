@@ -1,12 +1,10 @@
-class Play
+class Skip
   def initialize(*args)
     @app = args.length > 1 ? args.first : "Rdio"
   end
 
   def go
-    `osascript -e 'tell application "#{@app}" to launch'`
-    sleep 1
-    `osascript -e 'tell application "#{@app}" to play'`
+    `osascript -e 'tell application "#{@app}" to next track'`
   end
 
   def respond
@@ -18,6 +16,6 @@ class Play
   end
 
   def matches
-    ['play', 'play my music']
+    ['skip', 'skip this song', 'next', 'next song']
   end
 end
