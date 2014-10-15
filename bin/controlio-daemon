@@ -1,8 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'daemons'
 require 'controlio'
 
 Controlio.setup
-Daemons.daemonize
+Process.daemon
 Controlio.start

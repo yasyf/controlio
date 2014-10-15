@@ -13,6 +13,5 @@ module Controlio
     rescue
     end
     settings = Settings.new
-    exit
   end
 end
