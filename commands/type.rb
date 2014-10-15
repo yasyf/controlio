@@ -1,6 +1,6 @@
 class Type
-  def initialize(*args)
-    @keys = args[0...-1].join(' ')
+  def initialize(args, settings)
+    @keys = args.join(' ')
   end
 
   def go
@@ -15,7 +15,7 @@ class Type
     false
   end
 
-  def matches
+  def self.matches
     ['type']
   end
 end

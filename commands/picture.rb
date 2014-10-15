@@ -3,8 +3,8 @@ require 'rest_client'
 class Picture
   FILE_LOCATION = "/tmp/tmp.jpg"
 
-  def initialize(*args)
-    @api_root = args.last
+  def initialize(args, settings)
+    @api_root = settings['api_root']
   end
 
   def go
@@ -21,7 +21,7 @@ class Picture
     true
   end
 
-  def matches
+  def self.matches
     ['picture', 'snap']
   end
 end

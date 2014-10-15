@@ -3,7 +3,7 @@ require 'rest_client'
 class Screenshot
   FILE_LOCATION = "/tmp/tmp.jpg"
 
-  def initialize(*args)
+  def initialize(args, settings)
     @api_root = args.last
   end
 
@@ -21,7 +21,7 @@ class Screenshot
     true
   end
 
-  def matches
+  def self.matches
     ['screenshot']
   end
 end

@@ -1,6 +1,6 @@
 class Pause
-  def initialize(*args)
-    @app = args.length > 1 ? args.first : "Rdio"
+  def initialize(args, settings)
+    @app = args.first || settings['default_player']
   end
 
   def go
@@ -15,7 +15,7 @@ class Pause
     false
   end
 
-  def matches
+  def self.matches
     ['pause', 'pause my music']
   end
 end

@@ -1,5 +1,5 @@
 class HelloWorld
-  def initialize(*args)
+  def initialize(args, settings)
   end
 
   def go
@@ -14,7 +14,7 @@ class HelloWorld
     false
   end
 
-  def matches
+  def self.matches
     ['hw', 'hello world']
   end
 end

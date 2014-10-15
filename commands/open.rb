@@ -1,6 +1,6 @@
 class Open
-  def initialize(*args)
-    @url = args[0...-1].join(' ').strip
+  def initialize(args, settings)
+    @url = args.join(' ').strip
   end
 
   def go
@@ -15,7 +15,7 @@ class Open
     false
   end
 
-  def matches
+  def self.matches
     ['open']
   end
 end

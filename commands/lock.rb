@@ -1,5 +1,5 @@
 class Lock
-  def initialize(*args)
+  def initialize(args, settings)
   end
 
   def go
@@ -14,7 +14,7 @@ class Lock
     false
   end
 
-  def matches
+  def self.matches
     ['lock', 'lock my computer', 'lock my screen']
   end
 end

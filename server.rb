@@ -13,15 +13,12 @@ class Server
   def go
     loop do
       check_for_commands.each do |c|
-        matched = false
-        command, *args = command_options(c)
-        if command.present?
-          klass = @mappings[command.downcase]
-          puts "Running #{klass}"
-          instance = klass.new(*args, @api_root)
+        klass, args = command_options(c)
+        if klass.present?
+          puts "Running #{klass} (#{args})"
+          instance = klass.new(args, @settings)
           instance.go
           send instance.respond, instance.media?
-          matched = true
         else
           send "Command '#{c['message']}' was not found!"
         end
@@ -57,9 +54,10 @@ class Server
   end
 
   def command_options(c)
-    options = c['message'].split(' ')
-    (1...options.length).each do |i|
-      return [command, options[i..-1]] if @mappings.include? (command = options[0...i])
+    options = c['message'].downcase.split(' ')
+    (1..options.length).each do |i|
+      command = options.first(i).join(' ')
+      return [@mappings[command], options[i..-1]] if @mappings.include? command
     end
     []
   end
@@ -73,7 +71,7 @@ class Server
     Dir["#{File.dirname(__FILE__)}/commands/*.rb"].each do |file|
       require_relative file
       klass = file.split("/").last.split('.').first.camelize.constantize
-      klass.new.matches.each do |match|
+      klass.matches.each do |match|
         prefixes.each do |p|
           @mappings["#{p}#{match}"] = klass
         end

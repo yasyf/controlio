@@ -1,6 +1,6 @@
 class Say
-  def initialize(*args)
-    @text = args[0...-1].join(' ')
+  def initialize(args, settings)
+    @text = args.join(' ')
   end
 
   def go
@@ -15,7 +15,7 @@ class Say
     false
   end
 
-  def matches
+  def self.matches
     ['say']
   end
 end

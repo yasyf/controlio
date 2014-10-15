@@ -1,6 +1,6 @@
 class Play
-  def initialize(*args)
-    @app = args.length > 1 ? args.first : "Rdio"
+  def initialize(args, settings)
+    @app = args.first || settings['default_player']
   end
 
   def go
@@ -17,7 +17,7 @@ class Play
     false
   end
 
-  def matches
+  def self.matches
     ['play', 'play my music']
   end
 end

@@ -1,5 +1,5 @@
 class Cat
-  def initialize(*args)
+  def initialize(args, settings)
   end
 
   def go
@@ -14,7 +14,7 @@ class Cat
     false
   end
 
-  def matches
+  def self.matches
     ['cat', 'cat mit', 'nyan']
   end
 end

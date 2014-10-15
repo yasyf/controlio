@@ -1,5 +1,5 @@
 class SetVolume
-  def initialize(*args)
+  def initialize(args, settings)
     @level = args.first
   end
 
@@ -15,7 +15,7 @@ class SetVolume
     false
   end
 
-  def matches
+  def self.matches
     ['set volume']
   end
 end
