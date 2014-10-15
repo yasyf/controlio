@@ -1,9 +1,8 @@
 PATH
   remote: .
   specs:
-    controlio (0.0.4)
+    controlio (0.0.5)
       activesupport (~> 4.1.6)
-      daemons (~> 1.1.9)
       rest_client (~> 1.7.3)
 
 GEM
@@ -15,7 +14,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    daemons (1.1.9)
     i18n (0.6.11)
     json (1.8.1)
     minitest (5.4.0)
