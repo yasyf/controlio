@@ -72,9 +72,12 @@ module Controlio
     end
 
     def generate_command_mappings!
+      puts Commands.constants
       @mappings = {}
-      Dir["#{File.dirname(__FILE__)}/commands/*.rb"].each do |file|
+      Dir["#{File.dirname(__FILE__)}/../commands/*.rb"].each do |file|
         require_relative file
+        puts file.split("/").last.split('.').first
+        exit()
         klass = file.split("/").last.split('.').first.camelize.constantize
         klass.matches.each do |match|
           prefixes.each do |p|

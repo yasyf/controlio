@@ -3,5 +3,6 @@
 require 'daemons'
 require 'controlio'
 
-Daemons.daemonize
-Controlio.start
+Daemons.run_proc('controlio') do
+  Controlio.start
+end

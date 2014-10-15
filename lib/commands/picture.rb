@@ -1,27 +1,29 @@
 require 'rest_client'
 
-class Picture
-  FILE_LOCATION = "/tmp/tmp.jpg"
+module Commands
+  class Picture
+    FILE_LOCATION = "/tmp/tmp.jpg"
 
-  def initialize(args, settings)
-    @api_root = settings['api_root']
-  end
+    def initialize(args, settings)
+      @api_root = settings['api_root']
+    end
 
-  def go
-    `imagesnap -q #{FILE_LOCATION}`
-    response = RestClient.post "#{@api_root}/upload", file: File.new(FILE_LOCATION, 'rb')
-    @url = JSON.load(response)['url']
-  end
+    def go
+      `imagesnap -q #{FILE_LOCATION}`
+      response = RestClient.post "#{@api_root}/upload", file: File.new(FILE_LOCATION, 'rb')
+      @url = JSON.load(response)['url']
+    end
 
-  def respond
-    @url
-  end
+    def respond
+      @url
+    end
 
-  def media?
-    true
-  end
+    def media?
+      true
+    end
 
-  def self.matches
-    ['picture', 'snap']
+    def self.matches
+      ['picture', 'snap']
+    end
   end
 end
