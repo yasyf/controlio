@@ -9,7 +9,7 @@ module Controlio
 
   def self.setup
     begin
-      File.delete "~/.controlio.json"
+      File.delete File.expand_path("~/.controlio.json")
     rescue
     end
     settings = Settings.new
