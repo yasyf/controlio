@@ -4,7 +4,7 @@ require 'active_support/all'
 require 'io/console'
 
 class Settings
-  API_ROOT = 'http://0.0.0.0:5000'
+  API_ROOT = ENV['API_ROOT'] || 'http://ym-remote-control-web.herokuapp.com'
   SETTINGS_FILE = File.expand_path "~/.controlio.json"
 
   def initialize
