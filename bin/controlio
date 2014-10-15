@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'daemons'
+require 'controlio'
+
+Daemons.daemonize
+Controlio.start
