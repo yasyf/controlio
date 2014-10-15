@@ -1,7 +1,7 @@
 module Commands
   class Play
     def initialize(args, settings)
-      @app = args.first || settings['default_player']
+      @app = args.first || settings.get('default_player')
     end
 
     def go

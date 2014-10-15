@@ -5,7 +5,7 @@ module Commands
     FILE_LOCATION = "/tmp/tmp.jpg"
 
     def initialize(args, settings)
-      @api_root = settings['api_root']
+      @api_root = settings.get('api_root')
     end
 
     def go
