@@ -1,6 +1,6 @@
 class Open
   def initialize(*args)
-    @url = args[0...-1].join(':').strip
+    @url = args[0...-1].join(' ').strip
   end
 
   def go

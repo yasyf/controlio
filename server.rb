@@ -7,26 +7,22 @@ class Server
 
   def initialize
     authorize
-    generate_command_mappings
+    generate_command_mappings!
   end
 
   def go
     loop do
       check_for_commands.each do |c|
         matched = false
-        command_options(c).each do |split|
-          command, *args = split
+        command, *args = command_options(c)
+        if command.present?
           klass = @mappings[command.downcase]
-          if klass.present?
-            puts "Running #{klass}"
-            instance = klass.new(*args, API_ROOT)
-            instance.go
-            send instance.respond, instance.media?
-            matched = true
-            break
-          end
-        end
-        unless matched
+          puts "Running #{klass}"
+          instance = klass.new(*args, API_ROOT)
+          instance.go
+          send instance.respond, instance.media?
+          matched = true
+        else
           send "Command '#{c['message']}' was not found!"
         end
         destroy c['_id']
@@ -59,27 +55,24 @@ class Server
   end
 
   def command_options(c)
-    options = []
-    options << c['message'].split(':')
-    split_on_spaces = c['message'].split(' ')
-    options << split_on_spaces
-    (2...options.length).each do |i|
-      options << [split_on_spaces[0...i].join(' ')] + split_on_spaces[i..-1]
+    options = c['message'].split(' ')
+    (1...options.length).each do |i|
+      return [command, options[i..-1]] if @mappings.include? (command = options[0...i])
     end
-    options
+    []
   end
 
-  def permutations
-    ['', 'do ', 'take a ']
+  def prefixes
+    ['']
   end
 
-  def generate_command_mappings
+  def generate_command_mappings!
     @mappings = {}
     Dir["#{File.dirname(__FILE__)}/commands/*.rb"].each do |file|
       require_relative file
       klass = file.split("/").last.split('.').first.camelize.constantize
       klass.new.matches.each do |match|
-        permutations.each do |p|
+        prefixes.each do |p|
           @mappings["#{p}#{match}"] = klass
         end
       end
