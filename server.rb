@@ -50,7 +50,11 @@ class Server
   end
 
   def check_for_commands
-    JSON.load(RestClient.get("#{@api_root}/poll?key=#{@api_key}"))['commands']
+    begin
+      JSON.load(RestClient.get("#{@api_root}/poll?key=#{@api_key}"))['commands']
+    rescue
+      []
+    end
   end
 
   def command_options(c)
