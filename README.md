@@ -4,7 +4,7 @@ Controlio is a simple service which allows you to control your computer via SMS 
 
 ## Setup
 
-Install the gem with `gem install controlio`. Run the setup with `controlio-setup`. Once you're set up, you can launch the client at any point with `controlio start`, which will also automatically background it.
+Install the gem with `gem install controlio`. Run the setup with `controlio-setup`. Once you're set up, you can launch the client at any point with `controlio`, or `controlio-daemon` to automatically background it.
 
 ## Screenshots
 

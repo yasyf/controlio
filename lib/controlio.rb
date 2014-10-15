@@ -7,9 +7,9 @@ module Controlio
     client.go
   end
 
-  def self.setup
+  def self.setup(force=false)
     begin
-      File.delete File.expand_path("~/.controlio.json")
+      File.delete File.expand_path("~/.controlio.json") if force
     rescue
     end
     settings = Settings.new

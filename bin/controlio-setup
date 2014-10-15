@@ -2,4 +2,4 @@
 
 require 'controlio'
 
-Controlio.setup
+Controlio.setup(true)

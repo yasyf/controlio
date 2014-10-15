@@ -6,6 +6,8 @@ require "controlio/settings"
 module Controlio
   class Client
 
+    POLL_DELAY = 10
+
     def initialize
       authorize
       generate_command_mappings!
@@ -25,7 +27,7 @@ module Controlio
           end
           destroy c['_id']
         end
-        sleep 1
+        sleep POLL_DELAY
       end
     end
 
