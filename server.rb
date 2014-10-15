@@ -1,9 +1,9 @@
 require 'json'
 require 'rest_client'
 require 'active_support/all'
+require_relative 'settings'
 
 class Server
-  API_ROOT = 'http://ym-remote-control-web.herokuapp.com'
 
   def initialize
     authorize
@@ -18,7 +18,7 @@ class Server
         if command.present?
           klass = @mappings[command.downcase]
           puts "Running #{klass}"
-          instance = klass.new(*args, API_ROOT)
+          instance = klass.new(*args, @api_root)
           instance.go
           send instance.respond, instance.media?
           matched = true
@@ -34,7 +34,9 @@ class Server
   private
 
   def authorize
-    @api_key = begin File.read(File.expand_path("~/.remote_control_key")).chomp rescue throw "No API key found!" end
+    @settings = Settings.new
+    @api_key = @settings.get('api_key')
+    @api_root = @settings.get('api_root')
   end
 
   def send(message, media=false)
@@ -43,15 +45,15 @@ class Server
     else
       options = {key: @api_key, message: message}
     end
-    RestClient.post("#{API_ROOT}/send", options) if message.present?
+    RestClient.post("#{@api_root}/send", options) if message.present?
   end
 
   def destroy(id)
-    RestClient.post "#{API_ROOT}/destroy/#{id}", key: @api_key
+    RestClient.post "#{@api_root}/destroy/#{id}", key: @api_key
   end
 
   def check_for_commands
-    JSON.load(RestClient.get("#{API_ROOT}/poll?key=#{@api_key}"))['commands']
+    JSON.load(RestClient.get("#{@api_root}/poll?key=#{@api_key}"))['commands']
   end
 
   def command_options(c)
