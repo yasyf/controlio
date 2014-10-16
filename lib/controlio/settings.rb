@@ -35,8 +35,8 @@ module Controlio
         end
       else
         puts "Pick a password"
-        password = gets.chomp
-        key = RestClient.post JSON.load(RestClient.post("#{API_ROOT}/key/#{number}", password: password))['key']
+        password = STDIN.noecho(&:gets).chomp
+        key = JSON.load(RestClient.post("#{API_ROOT}/key/#{number}", password: password))['key']
       end
       puts "Successfuly authenticated!"
       settings[:api_key] = key
