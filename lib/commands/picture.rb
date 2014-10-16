@@ -9,7 +9,7 @@ module Commands
     end
 
     def go
-      `controlio-imagesnap -q #{FILE_LOCATION}`
+      `#{File.expand_path("#{File.dirname(__FILE__)}/../../sbin/controlio-imagesnap")} -q #{FILE_LOCATION}`
       response = RestClient.post "#{@api_root}/upload", file: File.new(FILE_LOCATION, 'rb')
       @url = JSON.load(response)['url']
     end
