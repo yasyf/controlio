@@ -20,7 +20,7 @@ module Controlio
           if klass.present?
             puts "Running #{klass} (#{args})"
             instance = klass.new(args, @settings)
-            instance.go
+            spawn_and_timeout instance
             send instance.respond, instance.media?
           else
             send "Command '#{c['message']}' was not found!"
@@ -32,6 +32,22 @@ module Controlio
     end
 
     private
+
+    def spawn_and_timeout(instance)
+      pid = fork do
+        instance.go
+      end
+      Process.detach pid
+      pid2 = fork do
+        sleep 10
+        begin
+          Process.kill "TERM", pid
+        rescue
+        end
+      end
+      Process.detach pid2
+      pid
+    end
 
     def authorize
       @settings = Settings.new
