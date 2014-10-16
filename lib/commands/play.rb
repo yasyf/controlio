@@ -13,7 +13,7 @@ module Commands
     end
 
     def respond
-      sleep 5
+      sleep 3.5
       "Now playing: #{`osascript -e 'tell application "#{@app}" to get the name of the current track'`}".chomp rescue ""
     end
 

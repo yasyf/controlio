@@ -6,7 +6,7 @@ require "controlio/settings"
 module Controlio
   class Client
 
-    POLL_DELAY = 10
+    POLL_DELAY = 5
 
     def initialize
       authorize

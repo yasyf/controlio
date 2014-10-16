@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    controlio (0.0.8)
+    controlio (0.0.9)
       activesupport (~> 4.1.6)
       rest_client (~> 1.7.3)
 
