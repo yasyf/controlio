@@ -23,7 +23,7 @@ module Controlio
     private
 
     def create_new_settings
-      settings = {api_root: API_ROOT}
+      settings = {api_root: API_ROOT, default_player: 'iTunes'}
       puts "Enter your phone number"
       number = gets.chomp
       if JSON.load(RestClient.get("#{API_ROOT}/check/#{number}"))['registered']

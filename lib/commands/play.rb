@@ -1,7 +1,9 @@
+require "helpers/player"
+
 module Commands
   class Play
     def initialize(args, settings)
-      @app = args.first || settings.get('default_player')
+      @app = args.first || Helpers::Player.to_s || settings.get('default_player')
     end
 
     def go
@@ -11,6 +13,7 @@ module Commands
     end
 
     def respond
+      puts @app
       "Now playing: #{`osascript -e 'tell application "#{@app}" to get the name of the current track'`}".chomp rescue ""
     end
 

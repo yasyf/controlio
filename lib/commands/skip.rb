@@ -1,7 +1,9 @@
+require "helpers/player"
+
 module Commands
   class Skip
     def initialize(args, settings)
-      @app = args.first || settings.get('default_player')
+      @app = args.first || Helpers::Player.to_s || settings.get('default_player')
     end
 
     def go
