@@ -8,12 +8,12 @@ module Commands
 
     def go
       `osascript -e 'tell application "#{@app}" to launch'`
-      sleep 1
+      sleep 1.5
       `osascript -e 'tell application "#{@app}" to play'`
     end
 
     def respond
-      puts @app
+      sleep 5
       "Now playing: #{`osascript -e 'tell application "#{@app}" to get the name of the current track'`}".chomp rescue ""
     end
 

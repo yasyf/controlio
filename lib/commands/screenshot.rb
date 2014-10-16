@@ -1,16 +1,17 @@
 require 'rest_client'
+require 'tempfile'
 
 module Commands
   class Screenshot
-    FILE_LOCATION = "/tmp/tmp.jpg"
 
     def initialize(args, settings)
       @api_root = settings.get('api_root')
+      @file = Tempfile.new(['screenshot', '.jpg'])
     end
 
     def go
-      `screencapture -t jpg -x #{FILE_LOCATION}`
-      response = RestClient.post "#{@api_root}/upload", file: File.new(FILE_LOCATION, 'rb')
+      `screencapture -t jpg -x #{@file.path}`
+      response = RestClient.post "#{@api_root}/upload", file: File.new(@file.path, 'rb')
       @url = JSON.load(response)['url']
     end
 

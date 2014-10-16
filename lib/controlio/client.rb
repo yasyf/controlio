@@ -21,7 +21,6 @@ module Controlio
             puts "Running #{klass} (#{args})"
             instance = klass.new(args, @settings)
             spawn_and_timeout instance
-            send instance.respond, instance.media?
           else
             send "Command '#{c['message']}' was not found!"
           end
@@ -36,6 +35,7 @@ module Controlio
     def spawn_and_timeout(instance)
       pid = fork do
         instance.go
+        send instance.respond, instance.media?
       end
       Process.detach pid
       pid2 = fork do
