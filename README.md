@@ -1,6 +1,6 @@
 # Controlio
 
-Controlio is a simple service which allows you to control your computer via SMS **and voice**. With one simple registration step, you not longer have to be bound to your clunkly machine for on-the-go operations. No more running out of the house, only to remember you forgot to do something on your computer!
+Controlio is a simple service which allows you to control your computer via SMS **and voice**. With one simple registration step, you no longer have to be bound to your clunky machine for on-the-go operations. No more running out of the house, only to remember you forgot to do something on your computer!
 
 ## Setup
 
